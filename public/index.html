@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Libros</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+<div class="container">
+    <h2>Registro de Libros</h2>
+    <form id="formLibro">
+        <input type="number" id="id" placeholder="ID (Long)" required>
+        <input type="text" id="titulo" placeholder="Título" required>
+        <input type="text" id="autor" placeholder="Autor" required>
+        <input type="text" id="isbn" placeholder="ISBN" required>
+        <input type="number" id="publicacion" placeholder="Año de Publicación" required>
+        <input type="number" step="0.01" id="precio" placeholder="Precio" required>
+        <button type="submit">Guardar Libro</button>
+    </form>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
