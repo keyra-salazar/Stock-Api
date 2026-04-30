@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockAlert - Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        
+        /* Regla solicitada: Resaltar en rojo los productos bajo el umbral */
+        .stock-bajo { 
+            background-color: #ffdddd; 
+            color: #d9534f; 
+            font-weight: bold; 
+        }
+        .alerta-icono { color: red; margin-right: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1><%= mensaje %></h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad Actual</th>
+                <th>Umbral Mínimo</th>
+                <th>Estado de Alerta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (typeof productos !== 'undefined' && productos.length > 0) { %>
+                <% productos.forEach(producto => { %>
+                    <tr class="<%= producto.cantidad < producto.umbralMinimo ? 'stock-bajo' : '' %>">
+                        <td><%= producto.nombre %></td>
+                        <td><%= producto.cantidad %></td>
+                        <td><%= producto.umbralMinimo %></td>
+                        <td>
+                            <%= producto.estadoAlerta ? 'Notificado' : 'Ok' %>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="4" style="text-align: center;">No hay productos registrados.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+</body>
+</html>
