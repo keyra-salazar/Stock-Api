@@ -41,7 +41,7 @@
                         <td><%= producto.cantidad %></td>
                         <td><%= producto.umbralMinimo %></td>
                         <td>
-                            <%= producto.estadoAlerta ? 'Notificado' : 'Ok' %>
+                            <%= producto.cantidad < producto.umbralMinimo ? '⚠️ Stock Crítico' : '✅ Estable' %>
                         </td>
                     </tr>
                 <% }) %>

@@ -1,4 +1,4 @@
-const Product = require('../models/Products');
+const Products = require('../models/Products');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 // GET /productos: Lee todos los documentos (Read)
 exports.obtenerProductos = async (req, res) => {
     try {
-        const productos = await Product.find();
+        const productos = await Products.find();
         res.json(productos);
     } catch (error) {
         res.status(500).json({ mensaje: "Error al obtener productos" });
@@ -16,7 +16,7 @@ exports.obtenerProductos = async (req, res) => {
 // POST /productos: Crea un nuevo producto (Create)
 exports.crearProducto = async (req, res) => {
     try {
-        const nuevoProducto = new Product(req.body);
+        const nuevoProducto = new Products(req.body);
         await nuevoProducto.save();
         res.status(201).json(nuevoProducto);
     } catch (error) {
@@ -28,8 +28,7 @@ exports.crearProducto = async (req, res) => {
 exports.actualizarStock = async (req, res) => {
     try {
         const { cantidad } = req.body;
-        // Al actualizar stock, reseteamos estadoAlerta a false para permitir nuevas notificaciones
-        const producto = await Product.findByIdAndUpdate(
+        const producto = await Products.findByIdAndUpdate(
             req.params.id, 
             { cantidad, estadoAlerta: false }, 
             { new: true }
